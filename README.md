@@ -24,7 +24,7 @@ Project was generated with [Yeoman](http://yeoman.io/)
   + `actions`: directory to put your [flux actions](https://facebook.github.io/react/blog/2014/07/30/flux-actions-and-the-dispatcher.html). Actions are JS objects describing (marking and holding payload) an event that did happen in the app causing an update to stores
   + `components`: UI components written with jsx and React go here
   + `config`: configuration files for UI 
-  + `containers`: folder for top level components
+  + `containers`: folder for top level components, they describe how things work
   + `reducers`: place for [redux reducers](http://redux.js.org/docs/basics/Reducers.html). `reducer, a pure function with (state, action) => state signature. It describes how an action transforms the state into the next state.`
   + `sources`: folder for flux datasources
   + `stores`: for flux stores holding application state as an JS object. Store's `API is { subscribe, dispatch, getState }`
