@@ -3,9 +3,20 @@ Internal projects for introducing backenders to javascript
 
 ## Getting started
 
+If you start your adventure with front-end development from scratch you may want to read those additional resources:
+* [NodeJS](https://nodejs.org/en/) JavaScript runtime
+* [npm](https://www.npmjs.com/) package management for JavaScript
+
+Then:
+
 * First time do `npm install`
 * To get the program running `npm start`
 * To start tests `npm test`
+* Use `npm clean` to get rid of old files
+* To validate your project for correctness use `npm lint`
+* Create a distributable version with `npm dist`
+ 
+For more aliases check `npm` docs and `package.json` in the repo. 
 
 ## Stack 
 
