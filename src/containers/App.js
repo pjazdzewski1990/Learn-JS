@@ -4,12 +4,18 @@ import React, {
 } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import Main from '../components/Main';
+import Logo from '../components/Logo';
+import Recipes from '../components/Recipes';
 
 class App extends Component {
   render() {
     const {actions} = this.props;
-    return <Main actions={actions}/>;
+    return (
+      <div>
+        <Logo actions={actions}/>
+        <Recipes/>
+      </div>
+    );
   }
 }
 /* HINT: if you adjust the initial type of your reducer, you will also have to

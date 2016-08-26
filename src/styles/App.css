@@ -4,18 +4,37 @@ body {
   background: #fff;
 }
 
-.index img {
+.index {
   margin: 40px auto;
   border-radius: 4px;
   background: #fff;
   display: block;
 }
 
-.index .notice {
-  margin: 20px auto;
-  padding: 15px 0;
+.recipe-search {
+  margin: 40px auto;
+  display: block;
+  width: 50%;
+}
+
+.recipe-list {
+  width: 800px;
+  list-style: none;
+  padding: 0;
+  margin: 40px auto;
   text-align: center;
-  border: 1px solid #000;
-  border-width: 1px 0;
-  background: #666;
+  overflow: auto;
+}
+
+.recipe-list li span {
+  display: block;
+  clear: both;
+  background: #6A6BD4;
+  padding: 15px 0;
+}
+
+ul ul li {
+  float: left;
+  width: 90px;
+  margin: 5px;
 }
