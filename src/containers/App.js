@@ -12,7 +12,7 @@ class App extends Component {
     const {actions} = this.props;
     return (
       <div>
-        <Logo actions={actions}/>
+        <Logo/>
         <Recipes/>
       </div>
     );

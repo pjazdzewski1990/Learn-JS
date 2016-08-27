@@ -26,15 +26,17 @@ body {
   overflow: auto;
 }
 
-.recipe-list li span {
+.recipe-list li img {
   display: block;
   clear: both;
-  background: #6A6BD4;
   padding: 15px 0;
+  
+  height: 150px;
+  width: 150px;
 }
 
 ul ul li {
   float: left;
-  width: 90px;
+  width: 150px;
   margin: 5px;
 }

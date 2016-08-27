@@ -10,11 +10,11 @@ var RecipeList = React.createClass({
         <li>
           <ul className="recipe-list">
             {
-              this.props.items.map(item =>
-                <li key={item.name}>
-                  <span>{item.name}</span>
-                </li>
-              )
+              this.props.items.map(item => {
+                return (<li key={item.name}>
+                  <img src={item.image} alt={item.description} />
+                </li>);
+              })
             }
           </ul>
         </li>
