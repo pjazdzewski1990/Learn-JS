@@ -1,5 +1,5 @@
-require('normalize.css/normalize.css');
-require('styles/App.css');
+import 'normalize.css/normalize.css';
+import 'styles/App.css';
 
 import React from 'react';
 import RecipeList from '../components/RecipeList';
@@ -17,8 +17,8 @@ let recipes = [{name: 'Foo', description: 'Foooooooo', image: require('../images
               {name: 'Bar4', description: 'Baaar', image: require('../images/orange_4.png')},
               {name: 'Baz4', description: 'Baz', image: require('../images/orange_4.png')}];
 
-var Recipes = React.createClass({
-  render: function() {
+class Recipes extends React.Component {
+  render() {
     return (
       <div>
         <input type="text" name="search" className="recipe-search"/>
@@ -26,6 +26,6 @@ var Recipes = React.createClass({
       </div>
     );
   }
-});
+}
 
 export default Recipes;

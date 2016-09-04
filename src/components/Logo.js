@@ -1,11 +1,11 @@
-require('normalize.css/normalize.css');
-require('styles/App.css');
+import 'normalize.css/normalize.css';
+import 'styles/App.css';
+import image from  '../images/food.jpg';
 
 import React from 'react';
 
 class LogoComponent extends React.Component {
   render() {
-    let image = require('../images/food.jpg');
     return <img src={image} alt="Recipe source" className="index" />;
   }
 }

@@ -1,10 +1,10 @@
-require('normalize.css/normalize.css');
-require('styles/App.css');
+import 'normalize.css/normalize.css';
+import 'styles/App.css';
 
 import React from 'react';
 
-var RecipeList = React.createClass({
-  render: function() {
+class RecipeList extends React.Component {
+  render() {
     return (
       <ul className="recipe-list">
         <li>
@@ -21,6 +21,6 @@ var RecipeList = React.createClass({
       </ul>
     );
   }
-});
+}
 
 export default RecipeList;
