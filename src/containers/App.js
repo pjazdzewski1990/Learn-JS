@@ -1,30 +1,31 @@
-import React, {
-  Component,
-  PropTypes
-} from 'react';
-import { bindActionCreators } from 'redux';
-import { connect } from 'react-redux';
-import Main from '../components/Main';
+import React from 'react';
+import RecipesList from '../components/RecipesList';
 
-class App extends Component {
-  render() {
-    const {actions} = this.props;
-    return <Main actions={actions}/>;
-  }
+let recipes = [{ name: 'Foo', description: 'Foooooooo', image: require('../images/wings.jpg') },
+    { name: 'Bar', description: 'Baaar', image: require('../images/tortilla.jpg') },
+    { name: 'Baz', description: 'Baz', image: require('../images/cheeserolls.jpg') },
+    { name: 'Foo2', description: 'Foooooooo', image: require('../images/wings.jpg') },
+    { name: 'Bar2', description: 'Baaar', image: require('../images/tortilla.jpg') },
+    { name: 'Baz2', description: 'Baz', image: require('../images/cheeserolls.jpg') },
+    { name: 'Foo3', description: 'Foooooooo', image: require('../images/wings.jpg') },
+    { name: 'Bar3', description: 'Baaar', image: require('../images/tortilla.jpg') },
+    { name: 'Baz3', description: 'Baz', image: require('../images/cheeserolls.jpg') },
+    { name: 'Foo4', description: 'Foooooooo', image: require('../images/wings.jpg') },
+    { name: 'Bar4', description: 'Baaar', image: require('../images/tortilla.jpg') },
+    { name: 'Baz4', description: 'Baz', image: require('../images/cheeserolls.jpg') }
+];
+
+class App extends React.Component {
+    render() {
+        return (
+            <div>
+                     <div id = "mainImg">
+                            <img src = { require('../images/banner.jpg') }/>
+                     </div>
+                     <RecipesList data = { recipes }/>
+              </div>
+        )
+    }
 }
-/* HINT: if you adjust the initial type of your reducer, you will also have to
- *       adjust it here.
- */
-App.propTypes = {
-  actions: PropTypes.object.isRequired
-};
-function mapStateToProps(state) {
-  const props = {};
-  return props;
-}
-function mapDispatchToProps(dispatch) {
-  const actions = {};
-  const actionMap = { actions: bindActionCreators(actions, dispatch) };
-  return actionMap;
-}
-export default connect(mapStateToProps, mapDispatchToProps)(App);
+
+export default App;
