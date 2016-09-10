@@ -21,12 +21,14 @@ class RecipesList extends Component {
     render() {
         const recipesBoxes = this.state.recipesToShow.map(recipe => {
             return (
-                <RecipeBox key={recipe.name} recipeName={recipe.name} description={recipe.description} image={recipe.image} />
+                <RecipeBox key={recipe.name} recipeId={recipe.id} recipeName={recipe.name} recipeImage={recipe.image} />
             );
         });
         return (
           <div className="recipeList">
-				    <input type="text" placeholder="Search recipes..." onChange={this.handleSearch.bind(this)} />
+				    <input type="text" 
+              placeholder="Search recipes..." 
+              onChange={this.handleSearch.bind(this)} />
             <div id="cen">
               {recipesBoxes}
             </div>

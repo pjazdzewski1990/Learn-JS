@@ -3,7 +3,7 @@ class SearchRecipesService {
       return word.match(/\S+/g);
   }
   setsInterleave(set1, set2) {
-    //TODO: make private? 
+    //TODO: make private?
     return set1.filter(item => set2.includes(item)).length > 0;
   }
   filterRecipes(searchQuery, allRecipes) {
