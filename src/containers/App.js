@@ -22,7 +22,7 @@ class App extends React.Component {
                      <div id = "mainImg">
                             <img src = { require('../images/banner.jpg') }/>
                      </div>
-                     <RecipesList data = { recipes }/>
+                     <RecipesList allRecipes = { recipes }/>
               </div>
         )
     }
