@@ -2,12 +2,12 @@ import React, { Component } from 'react';
 import ContextMenu from './ReactContextMenu';
 import MoreIcon from '../images/moreIcon.png';
 import StarIcon from '../images/starIcon.png';
-import PrinterIcon from '../images/printerIcon.png';
+import PdfIcon from '../images/pdfIcon.png';
 
 class RecipeBox extends Component {
     componentWillMount() {
       this.setState({isHovering: false});
-    }  
+    }
     starRecipeHandler(event) {
       console.log('Starring ' + this.props.recipeName, event);
     }
@@ -16,7 +16,7 @@ class RecipeBox extends Component {
       //const dummyFile = require('../pdf/dummyRecipe.pdf');
       //console.log("File is " + dummyFile);
       //window.open(dummyFile);
-      window.open("/pdf/dummyRecipe.pdf"); //TODO: should pdf also go through webpack?
+      window.open('/pdf/dummyRecipe.pdf'); //TODO: should pdf also go through webpack?
     }
     hoverHandler(){
       this.setState({isHovering: !this.state.isHovering})
@@ -26,12 +26,12 @@ class RecipeBox extends Component {
       const hoverClass = (this.state.isHovering)? 'recipeBox recipe-hover' : 'recipeBox recipe-no-hover';
       const contextMenuItems = [
         {'icon': StarIcon, 'label': 'Add to favourites', 'function': this.starRecipeHandler.bind(this)},
-        {'icon': PrinterIcon, 'label': 'Print', 'function': this.printRecipeHandler.bind(this)}
+        {'icon': PdfIcon, 'label': 'Get as file', 'function': this.printRecipeHandler.bind(this)}
       ];
       
       return (
-        <div className={hoverClass} 
-          onMouseOver={this.hoverHandler.bind(this)} 
+        <div className={hoverClass}
+          onMouseOver={this.hoverHandler.bind(this)}
           onMouseOut={this.hoverHandler.bind(this)}>
           
 				  <img src={this.props.recipeImage}></img>
