@@ -90,6 +90,12 @@ h3.recipe-box-text {
   display: inline-block;
 }
 
+.recipe-hover {
+  box-shadow: 0px 5px 5px 5px rgba(0,0,0,0.3);
+  top: -5px;
+}
+
+/*adapted from https://github.com/amurp/react-context-menu*/
 .context-menu {
   position: absolute;
   z-index: 9000;
