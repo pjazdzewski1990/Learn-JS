@@ -44,15 +44,8 @@ export default class ContextMenu extends React.Component {
         event.preventDefault();
         this.setState({target: event.target});
 
-        let xOffset = Math.max(document.documentElement.scrollLeft, document.body.scrollLeft);
-        let yOffset = Math.max(document.documentElement.scrollTop, document.body.scrollTop);
-
         let menu = document.getElementById(this.elementUniqueId);
-        console.log("Opening!", menu);
-        menu.style.cssText =
-            //'left: ' + (event.clientX + xOffset) + 'px;' +
-            //'top: ' + (event.clientY + yOffset) + 'px;' +
-            'visibility: visible;';
+        menu.style.cssText = 'visibility: visible;';
     }
 
     closeContextMenu = () => {

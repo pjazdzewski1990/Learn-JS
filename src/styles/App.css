@@ -69,7 +69,6 @@ body {
   position: absolute;
   bottom: 0px;
   width: 60%;
-  padding-left: 2rem;
   line-height: 10px;
   color: white;
   background-color: rgba(0, 0, 0, 0.2);
@@ -80,11 +79,16 @@ body {
   width: 100%;
 }
 
-img.more-icon{
+img.more-icon {
   height: 32px;
   width: 32px;
+  
+  vertical-align: middle;
 }
 
+h3.recipe-box-text {
+  display: inline-block;
+}
 
 .context-menu {
   position: absolute;
@@ -96,9 +100,11 @@ img.more-icon{
   border: 1px solid rgba(0,0,0,0.15);
   border-radius:2px;
   box-shadow:0 1px 1px 1px rgba(0,0,0,0.05);
+  
   padding: 10px 15px;
+  margin: -20px 20px;
 
-  background: #f8f8f8;
+  background: white;
   visibility: hidden;
 }
 .context-menu span {
@@ -107,7 +113,6 @@ img.more-icon{
   display:flex;
   align-items: center;
   justify-content: flex-start;
-  margin-bottom: 7px;
 }
 .context-menu img {
     left: 0;

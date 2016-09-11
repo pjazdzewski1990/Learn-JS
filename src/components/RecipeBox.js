@@ -1,24 +1,25 @@
 import React, { Component } from 'react';
 import ContextMenu from './ReactContextMenu';
 import MoreIcon from '../images/moreIcon.png';
+import StarIcon from '../images/starIcon.png';
 
 class RecipeBox extends Component {
     starRecipeHandler(event) {
-      console.log("Starring " + this.props.recipeName)
+      console.log('Starring ' + this.props.recipeName, event);
     }
     render() {
-       const name = "recipe-box-"+this.props.recipeId
-        return (
-           <div className="recipeBox">
-				      <img src={this.props.recipeImage}></img>
-              <div className="recipeDesc">
-                <img id={name} className="more-icon" src={MoreIcon}></img>
-                <h3>{this.props.recipeName}</h3>
-              </div>
+      const name = 'recipe-box-' + this.props.recipeId;
+      return (
+        <div className="recipeBox">
+				  <img src={this.props.recipeImage}></img>
+          <div className="recipeDesc">
+            <img id={name} className="more-icon" src={MoreIcon}></img>
+            <h3 className="recipe-box-text">{this.props.recipeName}</h3>
+          </div>
 
-              <ContextMenu contextID={name} items={[{'icon': MoreIcon, 'label': 'Star', 'function': this.starRecipeHandler.bind(this)}]} />
-			      </div>
-        );
+          <ContextMenu contextID={name} items={[{'icon': StarIcon, 'label': 'Add to favourites', 'function': this.starRecipeHandler.bind(this)}]} />
+        </div>
+      );
     }
 }
 

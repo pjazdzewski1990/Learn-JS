@@ -26,8 +26,8 @@ class RecipesList extends Component {
         });
         return (
           <div className="recipeList">
-				    <input type="text" 
-              placeholder="Search recipes..." 
+				    <input type="text"
+              placeholder="Search recipes..."
               onChange={this.handleSearch.bind(this)} />
             <div id="cen">
               {recipesBoxes}
