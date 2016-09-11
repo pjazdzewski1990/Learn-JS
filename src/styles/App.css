@@ -119,6 +119,9 @@ h3.recipe-box-text {
   display:flex;
   align-items: center;
   justify-content: flex-start;
+  
+  padding-top: 3px;
+  padding-bottom: 3px;
 }
 .context-menu img {
     left: 0;
