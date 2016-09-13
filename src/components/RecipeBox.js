@@ -5,18 +5,15 @@ import StarIcon from '../images/starIcon.png';
 import PdfIcon from '../images/pdfIcon.png';
 
 class RecipeBox extends Component {
-    componentWillMount() {
-      this.setState({isHovering: false});
+    constructor() {
+      super();
+      this.state = {isHovering: false};
     }
     starRecipeHandler(event) {
       console.log('Starring ' + this.props.recipeName, event);
     }
     printRecipeHandler(event) {
-      console.log('Printing ' + this.props.recipeName, event);
-      //const dummyFile = require('../pdf/dummyRecipe.pdf');
-      //console.log("File is " + dummyFile);
-      //window.open(dummyFile);
-      window.open('/pdf/dummyRecipe.pdf'); //TODO: should pdf also go through webpack?
+      window.open('/pdf/dummyRecipe.pdf');
     }
     hoverHandler(){
       this.setState({isHovering: !this.state.isHovering})
@@ -28,14 +25,14 @@ class RecipeBox extends Component {
         {'icon': StarIcon, 'label': 'Add to favourites', 'function': this.starRecipeHandler.bind(this)},
         {'icon': PdfIcon, 'label': 'Get as file', 'function': this.printRecipeHandler.bind(this)}
       ];
-      
+
       return (
         <div className={hoverClass}
           onMouseOver={this.hoverHandler.bind(this)}
           onMouseOut={this.hoverHandler.bind(this)}>
-          
+
 				  <img src={this.props.recipeImage}></img>
-          
+
           <div className="recipeDesc">
             <img id={name} className="more-icon" src={MoreIcon}></img>
             <h3 className="recipe-box-text">{this.props.recipeName}</h3>

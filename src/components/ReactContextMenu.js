@@ -11,10 +11,10 @@ export default class ContextMenu extends React.Component {
     }
 
     componentDidMount () {
-        let context = document.getElementById(this.props.contextID);
+        const context = document.getElementById(this.props.contextID);
         context.addEventListener('click', () => {this.openContextMenu(event)});
 
-        let menu = document.getElementById(this.elementUniqueId);
+        const menu = document.getElementById(this.elementUniqueId);
         menu.addEventListener('mouseleave', () => {this.closeContextMenu()});
 
     }
@@ -44,12 +44,12 @@ export default class ContextMenu extends React.Component {
         event.preventDefault();
         this.setState({target: event.target});
 
-        let menu = document.getElementById(this.elementUniqueId);
+        const menu = document.getElementById(this.elementUniqueId);
         menu.style.cssText = 'visibility: visible;';
     }
 
     closeContextMenu = () => {
-        let menu = document.getElementById(this.elementUniqueId);
+        const menu = document.getElementById(this.elementUniqueId);
         menu.style.cssText = 'visibility: hidden;';
 
     }

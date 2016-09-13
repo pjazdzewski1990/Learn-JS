@@ -6,12 +6,9 @@ import RecipeBox from './RecipeBox.js';
 import SearchRecipesService from './../services/SearchRecipesService.js';
 
 class RecipesList extends Component {
-    constructor() {
-      super();
-      this.search = new SearchRecipesService();
-    }
     componentWillMount() {
       this.setState({recipesToShow: this.props.allRecipes});
+      this.search = new SearchRecipesService();
     }
     handleSearch(event) {
       const searchQuery = event.target.value;
