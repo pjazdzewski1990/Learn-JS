@@ -10,47 +10,44 @@ export default class ContextMenu extends React.Component {
         }
     }
 
-    componentDidMount () {
-        const context = document.getElementById(this.props.contextID);
-        context.addEventListener('click', () => {this.openContextMenu(event)});
+    componentDidMount() {
+       const context = document.getElementById(this.props.contextID);
+       context.addEventListener('click', () => {this.openContextMenu(event)});
 
-        const menu = document.getElementById(this.elementUniqueId);
+       const menu = document.getElementById(this.elementUniqueId);
         menu.addEventListener('mouseleave', () => {this.closeContextMenu()});
-
     }
 
     render () {
-        return (
-            <div id={this.elementUniqueId} className={'context-menu'}>
-                {this.props.items.map((item) => {
-                        let clickHandler = () => {
-                            this.closeContextMenu();
-                            item.function(this.state.target);
-                        }
-                        let label = item.label;
-                        let icon = item.icon;
-                        return (
-                            <span onClick={clickHandler} key={label}>
-                                <img className="icon" src={icon} role="presentation" />
-                                {label}
-                            </span>
-                        );
-                    })}
-            </div>
-        );
+      const visibilityClass = (this.state.visible)? 'visible context-menu' : 'invisible context-menu';
+      return (
+        <div id={this.elementUniqueId} className={visibilityClass} >
+
+          {this.props.items.map((item) => {
+            const clickHandler = () => {
+              this.closeContextMenu();
+              item.function(this.state.target);
+            }
+
+            const label = item.label;
+            const icon = item.icon;
+            return (
+              <span onClick={clickHandler} key={label}>
+                <img className="icon" src={icon} role="presentation" />
+                {label}
+              </span>
+            );
+          })}
+        </div>
+      );
     }
 
-    openContextMenu = (event) => {
+    openContextMenu(event) {
         event.preventDefault();
-        this.setState({target: event.target});
-
-        const menu = document.getElementById(this.elementUniqueId);
-        menu.style.cssText = 'visibility: visible;';
+        this.setState({target: event.target, visible: true});
     }
 
-    closeContextMenu = () => {
-        const menu = document.getElementById(this.elementUniqueId);
-        menu.style.cssText = 'visibility: hidden;';
-
+    closeContextMenu() {
+      this.setState({visible: false});
     }
 }

@@ -12,19 +12,21 @@ class RecipeBox extends Component {
     starRecipeHandler(event) {
       console.log('Starring ' + this.props.recipeName, event);
     }
-    printRecipeHandler(event) {
+    printRecipeHandler() {
       window.open('/pdf/dummyRecipe.pdf');
     }
     hoverHandler(){
       this.setState({isHovering: !this.state.isHovering})
     }
     render() {
-      const name = 'recipe-box-' + this.props.recipeId;
-      const hoverClass = (this.state.isHovering)? 'recipeBox recipe-hover' : 'recipeBox recipe-no-hover';
+      const {recipeId, recipeName} = this.props;
+
+      const name = 'recipe-box-' + recipeId;
       const contextMenuItems = [
         {'icon': StarIcon, 'label': 'Add to favourites', 'function': this.starRecipeHandler.bind(this)},
         {'icon': PdfIcon, 'label': 'Get as file', 'function': this.printRecipeHandler.bind(this)}
       ];
+      const hoverClass = (this.state.isHovering)? 'recipeBox recipe-hover' : 'recipeBox recipe-no-hover';
 
       return (
         <div className={hoverClass}
@@ -35,10 +37,10 @@ class RecipeBox extends Component {
 
           <div className="recipeDesc">
             <img id={name} className="more-icon" src={MoreIcon}></img>
-            <h3 className="recipe-box-text">{this.props.recipeName}</h3>
+            <h3 className="recipe-box-text">{recipeName}</h3>
           </div>
 
-          <ContextMenu contextID={name} items={contextMenuItems} />
+          <ContextMenu contextID={name} items={contextMenuItems} ></ContextMenu>
         </div>
       );
     }
