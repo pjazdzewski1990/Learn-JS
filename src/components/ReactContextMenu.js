@@ -10,11 +10,6 @@ export default class ContextMenu extends React.Component {
         }
     }
 
-    componentDidMount() {
-       const context = document.getElementById(this.props.contextID);
-       context.addEventListener('click', () => {this.openContextMenu(event)});
-    }
-
     render () {
       const visibilityClass = (this.state.visible)? 'visible context-menu' : 'invisible context-menu';
       return (
@@ -24,10 +19,11 @@ export default class ContextMenu extends React.Component {
             const clickHandler = () => {
               this.closeContextMenu();
               item.function(this.state.target);
-            }
+            };
 
             const label = item.label;
             const icon = item.icon;
+
             return (
               <span onClick={clickHandler} key={label}>
                 <img className="icon" src={icon} role="presentation" />
@@ -40,7 +36,6 @@ export default class ContextMenu extends React.Component {
     }
 
     openContextMenu(event) {
-      event.preventDefault();
       this.setState({target: event.target, visible: true});
     }
 

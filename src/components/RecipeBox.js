@@ -18,6 +18,15 @@ class RecipeBox extends Component {
     hoverHandler(){
       this.setState({isHovering: !this.state.isHovering})
     }
+    openMenuHandler(event){
+      event.preventDefault();
+
+      const name = event.target.id;
+      const menu = this.refs[name];
+      if(menu != null) {
+        menu.openContextMenu({'target': name});
+      }
+    }
     render() {
       const {recipeId, recipeName} = this.props;
 
@@ -36,11 +45,11 @@ class RecipeBox extends Component {
 				  <img src={this.props.recipeImage}></img>
 
           <div className="recipeDesc">
-            <img id={name} className="more-icon" src={MoreIcon}></img>
+            <img id={name} className="more-icon" src={MoreIcon} onClick={this.openMenuHandler.bind(this)}></img>
             <h3 className="recipe-box-text">{recipeName}</h3>
           </div>
 
-          <ContextMenu contextID={name} items={contextMenuItems} ></ContextMenu>
+          <ContextMenu ref={name} contextID={name} items={contextMenuItems}></ContextMenu>
         </div>
       );
     }
