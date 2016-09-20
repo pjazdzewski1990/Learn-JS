@@ -13,15 +13,12 @@ export default class ContextMenu extends React.Component {
     componentDidMount() {
        const context = document.getElementById(this.props.contextID);
        context.addEventListener('click', () => {this.openContextMenu(event)});
-
-       const menu = document.getElementById(this.elementUniqueId);
-        menu.addEventListener('mouseleave', () => {this.closeContextMenu()});
     }
 
     render () {
       const visibilityClass = (this.state.visible)? 'visible context-menu' : 'invisible context-menu';
       return (
-        <div id={this.elementUniqueId} className={visibilityClass} >
+        <div id={this.elementUniqueId} className={visibilityClass} onMouseLeave={this.closeContextMenu.bind(this)}>
 
           {this.props.items.map((item) => {
             const clickHandler = () => {
@@ -43,8 +40,8 @@ export default class ContextMenu extends React.Component {
     }
 
     openContextMenu(event) {
-        event.preventDefault();
-        this.setState({target: event.target, visible: true});
+      event.preventDefault();
+      this.setState({target: event.target, visible: true});
     }
 
     closeContextMenu() {
