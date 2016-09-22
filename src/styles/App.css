@@ -46,6 +46,7 @@ body {
   padding: 0;
   border-top: 1px solid black;
   padding-top: .5rem;
+  padding-bottom: .5rem;
 }
 
 .recipeList input {
@@ -68,13 +69,70 @@ body {
   position: absolute;
   bottom: 0px;
   width: 60%;
-  padding-left: 2rem;
   line-height: 10px;
   color: white;
-  background-color: rgba(0, 0, 0, 0.3);
+  background-color: rgba(0, 0, 0, 0.2);
 }
 
 .recipeBox img{
   height: 100%;
   width: 100%;
+}
+
+img.more-icon {
+  height: 32px;
+  width: 32px;
+
+  vertical-align: middle;
+}
+
+h3.recipe-box-text {
+  display: inline-block;
+}
+
+.recipe-hover {
+  box-shadow: 0px 5px 5px 5px rgba(0,0,0,0.3);
+  top: -5px;
+}
+
+div.visible {
+  visibility: visible;
+}
+div.invisible {
+  visibility: hidden;
+}
+
+/*adapted from https://github.com/amurp/react-context-menu*/
+.context-menu {
+  position: absolute;
+  z-index: 9000;
+
+  display: flex;
+  flex-flow: column;
+
+  border: 1px solid rgba(0,0,0,0.15);
+  border-radius:2px;
+  box-shadow:0 1px 1px 1px rgba(0,0,0,0.05);
+
+  padding: 10px 15px;
+  margin: -20px 20px;
+
+  background: white;
+  visibility: hidden;
+}
+.context-menu span {
+  cursor: pointer;
+  font-size:14px;
+  display:flex;
+  align-items: center;
+  justify-content: flex-start;
+
+  padding-top: 3px;
+  padding-bottom: 3px;
+}
+.context-menu img {
+    left: 0;
+    margin-right: 10px;
+    height:20px;
+    width:20px;
 }
