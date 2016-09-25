@@ -16,10 +16,13 @@ class RecipesList extends Component {
       this.setState({recipesToShow: this.search.filterRecipes(searchQuery, allRecipes)});
     }
     render() {
+        const {onStarClick} = this.props;
+        console.log('Building list with ', this.state.recipesToShow);
+        console.log('Props are ', this.props.allRecipes);
         const recipesBoxes = this.state.recipesToShow.map(recipe => {
-            return (
-                <RecipeBox key={recipe.name} recipeId={recipe.id} recipeName={recipe.name} recipeImage={recipe.image} />
-            );
+          return (
+            <RecipeBox key={recipe.name} recipe={recipe} starHandler={onStarClick}/>
+          );
         });
         return (
           <div className="recipeList">

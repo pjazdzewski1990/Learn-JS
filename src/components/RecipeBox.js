@@ -1,16 +1,14 @@
 import React, { Component } from 'react';
 import ContextMenu from './ReactContextMenu';
 import MoreIcon from '../images/moreIcon.png';
-import StarIcon from '../images/starIcon.png';
+import NotStarredIcon from '../images/emptyStarIcon.png';
+import StarredIcon from '../images/starIcon.png';
 import PdfIcon from '../images/pdfIcon.png';
 
 class RecipeBox extends Component {
     constructor() {
       super();
       this.state = {isHovering: false};
-    }
-    starRecipeHandler(event) {
-      console.log('Starring ' + this.props.recipeName, event);
     }
     printRecipeHandler() {
       window.open('/pdf/dummyRecipe.pdf');
@@ -22,17 +20,21 @@ class RecipeBox extends Component {
       event.preventDefault();
 
       const name = event.target.id;
+      const id = event.target.dataset.recipeId;
+
       const menu = this.refs[name];
       if(menu != null) {
-        menu.openContextMenu({'target': name});
+        menu.openContextMenu({'target': name, 'recipeId': id});
       }
     }
     render() {
-      const {recipeId, recipeName} = this.props;
+      const {recipe, starHandler} = this.props;
+      console.log('isStarred ' + recipe.name, recipe.isStarred);
+      const starIcon = (recipe.isStarred)? StarredIcon : NotStarredIcon;
 
-      const name = 'recipe-box-' + recipeId;
+      const name = 'recipe-box-' + recipe.id;
       const contextMenuItems = [
-        {'icon': StarIcon, 'label': 'Add to favourites', 'function': this.starRecipeHandler.bind(this)},
+        {'icon': starIcon, 'label': 'Add to favourites', 'function': starHandler.bind(this)},
         {'icon': PdfIcon, 'label': 'Get as file', 'function': this.printRecipeHandler.bind(this)}
       ];
       const hoverClass = (this.state.isHovering)? 'recipeBox recipe-hover' : 'recipeBox recipe-no-hover';
@@ -42,11 +44,11 @@ class RecipeBox extends Component {
           onMouseOver={this.hoverHandler.bind(this)}
           onMouseOut={this.hoverHandler.bind(this)}>
 
-				  <img src={this.props.recipeImage}></img>
+				  <img src={recipe.image}></img>
 
           <div className="recipeDesc">
-            <img id={name} className="more-icon" src={MoreIcon} onClick={this.openMenuHandler.bind(this)}></img>
-            <h3 className="recipe-box-text">{recipeName}</h3>
+            <img id={name} data-recipe-id={recipe.id} className="more-icon" src={MoreIcon} onClick={this.openMenuHandler.bind(this)}></img>
+            <h3 className="recipe-box-text">{recipe.name}</h3>
           </div>
 
           <ContextMenu ref={name} contextID={name} items={contextMenuItems}></ContextMenu>
@@ -55,7 +57,7 @@ class RecipeBox extends Component {
     }
 }
 
-RecipeBox.propTypes = {
+RecipeBox.propTypes = { //TODO
     image: React.PropTypes.string,
     recipeName: React.PropTypes.string,
     description: React.PropTypes.string

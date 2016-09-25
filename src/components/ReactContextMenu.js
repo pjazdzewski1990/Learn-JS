@@ -18,7 +18,7 @@ export default class ContextMenu extends React.Component {
           {this.props.items.map((item) => {
             const clickHandler = () => {
               this.closeContextMenu();
-              item.function(this.state.target);
+              item.function(this.state.recipeId);
             };
 
             const label = item.label;
@@ -36,7 +36,7 @@ export default class ContextMenu extends React.Component {
     }
 
     openContextMenu(event) {
-      this.setState({target: event.target, visible: true});
+      this.setState({target: event.target, recipeId: event.recipeId, visible: true});
     }
 
     closeContextMenu() {
