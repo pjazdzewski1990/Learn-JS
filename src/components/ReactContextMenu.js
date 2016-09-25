@@ -21,8 +21,7 @@ export default class ContextMenu extends React.Component {
               item.function(this.state.recipeId);
             };
 
-            const label = item.label;
-            const icon = item.icon;
+            const {label, icon} = item;
 
             return (
               <span onClick={clickHandler} key={label}>
