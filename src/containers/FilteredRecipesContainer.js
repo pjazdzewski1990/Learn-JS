@@ -3,23 +3,29 @@
  */
 
 import { connect } from 'react-redux'
-import { starRecipeActionCreator } from '../actions/RecipeActionCreators'
+import { starRecipeActionCreator, queryRecipeActionCreator } from '../actions/RecipeActionCreators'
 import RecipesList from '../components/RecipesList'
+import SearchRecipesService from './../services/SearchRecipesService.js'
 
-const applyFilters = (allRecipes) => {
-  return allRecipes;
+const search = new SearchRecipesService();
+
+const applyFilters = (searchQuery, allRecipes) => {
+  return search.filterRecipes(searchQuery, allRecipes);
 };
 
 const mapStateToProps = (state) => {
   return {
-    allRecipes: applyFilters(state.RecipeReducer)
+    allRecipes: applyFilters(state.SearchReducer.query, state.RecipeReducer)
   }
 };
 
 const mapDispatchToProps = (dispatch) => {
   return {
     onStarClick: (recipeId) => {
-      dispatch(starRecipeActionCreator(recipeId))
+      dispatch(starRecipeActionCreator(recipeId));
+    },
+    onSearchChanged: (event) => {
+      dispatch(queryRecipeActionCreator(event.target.value))
     }
   }
 };

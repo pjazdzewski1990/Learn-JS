@@ -9,3 +9,10 @@ export const starRecipeActionCreator = (recipeId) => {
     recipeId: recipeId
   };
 };
+
+export const queryRecipeActionCreator = (search) => {
+  return {
+    type: ActionTypes.UPDATE_SEARCH_QUERY,
+    searchQuery: search
+  };
+};

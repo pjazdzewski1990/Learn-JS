@@ -19,7 +19,10 @@ const recipesInitialData = [
   { id: 11, name: 'Bar4', description: 'Baaar', image: require('./images/tortilla.jpg'), isStarred: false },
   { id: 12, name: 'Baz4', description: 'Baz', image: require('./images/cheeserolls.jpg'), isStarred: false }
 ];
-const recipeStore = createStore(RecipeRootReducer, {RecipeReducer: recipesInitialData});
+const recipeStore = createStore(RecipeRootReducer, {
+  RecipeReducer: recipesInitialData,
+  SearchReducer: {query: ''}
+});
 
 render(
   <Provider store={recipeStore}>

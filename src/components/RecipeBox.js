@@ -29,7 +29,6 @@ class RecipeBox extends Component {
     }
     render() {
       const {recipe, starHandler} = this.props;
-      console.log('isStarred ' + recipe.name, recipe.isStarred);
       const starIcon = (recipe.isStarred)? StarredIcon : NotStarredIcon;
 
       const name = 'recipe-box-' + recipe.id;

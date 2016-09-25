@@ -22,7 +22,6 @@ const RecipeReducer = (currentState = [], action) => {
         return currentState;
       }
     default:
-      console.log('Unrecognised action', action);
       return currentState;
   }
 };
