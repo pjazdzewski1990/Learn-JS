@@ -1,7 +1,7 @@
 require('normalize.css/normalize.css');
 require('styles/App.css');
 
-import React, { Component } from 'react';
+import React, { Component, PropTypes } from 'react';
 import RecipeBox from './RecipeBox.js';
 
 class RecipesList extends Component {
@@ -10,7 +10,7 @@ class RecipesList extends Component {
 
         const recipesBoxes = this.props.allRecipes.map(recipe => {
           return (
-            <RecipeBox key={recipe.name} recipe={recipe} starHandler={onStarClick}/>
+            <RecipeBox key={recipe.name} recipe={recipe} onStarClick={onStarClick}/>
           );
         });
 
@@ -28,7 +28,15 @@ class RecipesList extends Component {
 }
 
 RecipesList.propTypes = {
-    allRecipes: React.PropTypes.arrayOf(React.PropTypes.object)
+  allRecipes: PropTypes.arrayOf(PropTypes.shape({
+    id: PropTypes.number.isRequired,
+    name: PropTypes.string.isRequired,
+    description: PropTypes.string.isRequired,
+    image: PropTypes.string.isRequired,
+    isStarred: PropTypes.bool.isRequired
+  })).isRequired,
+  onStarClick: React.PropTypes.func.isRequired,
+  onSearchChanged: React.PropTypes.func.isRequired
 };
 
 export default RecipesList;

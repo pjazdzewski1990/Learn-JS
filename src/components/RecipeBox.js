@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, PropTypes } from 'react';
 import ContextMenu from './ReactContextMenu';
 import MoreIcon from '../images/moreIcon.png';
 import NotStarredIcon from '../images/emptyStarIcon.png';
@@ -28,12 +28,12 @@ class RecipeBox extends Component {
       }
     }
     render() {
-      const {recipe, starHandler} = this.props;
+      const {recipe, onStarClick} = this.props;
       const starIcon = (recipe.isStarred)? StarredIcon : NotStarredIcon;
 
       const name = 'recipe-box-' + recipe.id;
       const contextMenuItems = [
-        {'icon': starIcon, 'label': 'Add to favourites', 'function': starHandler.bind(this)},
+        {'icon': starIcon, 'label': 'Add to favourites', 'function': onStarClick.bind(this)},
         {'icon': PdfIcon, 'label': 'Get as file', 'function': this.printRecipeHandler.bind(this)}
       ];
       const hoverClass = (this.state.isHovering)? 'recipeBox recipe-hover' : 'recipeBox recipe-no-hover';
@@ -56,10 +56,15 @@ class RecipeBox extends Component {
     }
 }
 
-RecipeBox.propTypes = { //TODO
-    image: React.PropTypes.string,
-    recipeName: React.PropTypes.string,
-    description: React.PropTypes.string
-}
+RecipeBox.propTypes = {
+  recipe: PropTypes.shape({
+    id: PropTypes.number.isRequired,
+    name: PropTypes.string.isRequired,
+    description: PropTypes.string.isRequired,
+    image: PropTypes.string.isRequired,
+    isStarred: PropTypes.bool.isRequired
+  }).isRequired,
+  onStarClick: React.PropTypes.func.isRequired
+};
 
 export default RecipeBox;
