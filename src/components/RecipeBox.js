@@ -16,7 +16,7 @@ class RecipeBox extends Component {
     hoverHandler(){
       this.setState({isHovering: !this.state.isHovering})
     }
-    openMenuHandler(event){
+    openMenuHandler(event) {
       event.preventDefault();
 
       const name = event.target.id;
@@ -27,13 +27,16 @@ class RecipeBox extends Component {
         menu.openContextMenu(id);
       }
     }
+    starText(isStarred) {
+      return (!isStarred)? 'Add to favourites' : 'Remove from favourites';
+    }
     render() {
       const {recipe, onStarClick} = this.props;
       const starIcon = (recipe.isStarred)? StarredIcon : NotStarredIcon;
 
       const name = 'recipe-box-' + recipe.id;
       const contextMenuItems = [
-        {'icon': starIcon, 'label': 'Add to favourites', 'function': onStarClick.bind(this)},
+        {'icon': starIcon, 'label': this.starText(recipe.isStarred), 'function': onStarClick.bind(this)},
         {'icon': PdfIcon, 'label': 'Get as file', 'function': this.printRecipeHandler.bind(this)}
       ];
       const hoverClass = (this.state.isHovering)? 'recipeBox recipe-hover' : 'recipeBox recipe-no-hover';
