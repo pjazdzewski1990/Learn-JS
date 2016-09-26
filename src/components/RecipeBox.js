@@ -24,7 +24,7 @@ class RecipeBox extends Component {
 
       const menu = this.refs[name];
       if(menu != null) {
-        menu.openContextMenu({'target': name, 'recipeId': id});
+        menu.openContextMenu(id);
       }
     }
     render() {
@@ -50,7 +50,7 @@ class RecipeBox extends Component {
             <h3 className="recipe-box-text">{recipe.name}</h3>
           </div>
 
-          <ContextMenu ref={name} contextID={name} items={contextMenuItems}></ContextMenu>
+          <ContextMenu ref={name} items={contextMenuItems}></ContextMenu>
         </div>
       );
     }
