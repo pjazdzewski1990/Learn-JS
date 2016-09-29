@@ -5,6 +5,18 @@ import React, { Component, PropTypes } from 'react';
 import RecipeBox from './RecipeBox.js';
 
 class RecipesList extends Component {
+    static propTypes = {
+      allRecipes: PropTypes.arrayOf(PropTypes.shape({
+        id: PropTypes.number.isRequired,
+        name: PropTypes.string.isRequired,
+        description: PropTypes.string.isRequired,
+        image: PropTypes.string.isRequired,
+        isStarred: PropTypes.bool.isRequired
+      })).isRequired,
+      onStarClick: React.PropTypes.func.isRequired,
+      onSearchChanged: React.PropTypes.func.isRequired
+    }
+
     render() {
         const {onStarClick, onSearchChanged} = this.props;
 
@@ -26,17 +38,5 @@ class RecipesList extends Component {
         );
     }
 }
-
-RecipesList.propTypes = {
-  allRecipes: PropTypes.arrayOf(PropTypes.shape({
-    id: PropTypes.number.isRequired,
-    name: PropTypes.string.isRequired,
-    description: PropTypes.string.isRequired,
-    image: PropTypes.string.isRequired,
-    isStarred: PropTypes.bool.isRequired
-  })).isRequired,
-  onStarClick: React.PropTypes.func.isRequired,
-  onSearchChanged: React.PropTypes.func.isRequired
-};
 
 export default RecipesList;

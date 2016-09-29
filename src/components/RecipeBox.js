@@ -6,6 +6,17 @@ import StarredIcon from '../images/starIcon.png';
 import PdfIcon from '../images/pdfIcon.png';
 
 class RecipeBox extends Component {
+    static propTypes = {
+      recipe: PropTypes.shape({
+        id: PropTypes.number.isRequired,
+        name: PropTypes.string.isRequired,
+        description: PropTypes.string.isRequired,
+        image: PropTypes.string.isRequired,
+        isStarred: PropTypes.bool.isRequired
+      }).isRequired,
+      onStarClick: React.PropTypes.func.isRequired
+    }
+
     constructor() {
       super();
       this.state = {isHovering: false};
@@ -57,16 +68,5 @@ class RecipeBox extends Component {
       );
     }
 }
-
-RecipeBox.propTypes = {
-  recipe: PropTypes.shape({
-    id: PropTypes.number.isRequired,
-    name: PropTypes.string.isRequired,
-    description: PropTypes.string.isRequired,
-    image: PropTypes.string.isRequired,
-    isStarred: PropTypes.bool.isRequired
-  }).isRequired,
-  onStarClick: React.PropTypes.func.isRequired
-};
 
 export default RecipeBox;
