@@ -4,25 +4,23 @@
 
 import {ActionTypes} from '../actions/const'
 
-const RecipeReducer = (currentState = [], action) => {
+const RecipeReducer = (recipesState = [], action) => {
   switch (action.type) {
     case ActionTypes.STAR_ITEM:
-      // find ...
-      const idx = currentState.findIndex(item => item.id == action.recipeId);
-      if(idx >= 0) {
-        const starredRecipe = currentState[idx];
-        // ... update ...
-        starredRecipe.isStarred = !starredRecipe.isStarred;
-        // ... build new state
-        const newState = currentState.slice();
-        newState[idx] = starredRecipe;
 
-        return newState;
-      } else {
-        return currentState;
-      }
+      const modifiedState = recipesState.map((currentRecipes) => {
+        if(currentRecipes.id == action.recipeId) {
+          const modifiedItem = Object.assign({}, currentRecipes);
+          modifiedItem.isStarred = !modifiedItem.isStarred;
+          return modifiedItem;
+        } else {
+          return currentRecipes;
+        }
+      });
+
+      return modifiedState;
     default:
-      return currentState;
+      return recipesState;
   }
 };
 
