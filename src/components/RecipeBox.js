@@ -16,15 +16,14 @@ class RecipeBox extends Component {
     hoverHandler(){
       this.setState({isHovering: !this.state.isHovering})
     }
-    openMenuHandler(event) {
+    openMenuHandler(recipeId, event) {
       event.preventDefault();
 
       const name = event.target.id;
-      const id = event.target.dataset.recipeId;
-
       const menu = this.refs[name];
+
       if(menu != null) {
-        menu.openContextMenu(id);
+        menu.openContextMenu(recipeId);
       }
     }
     starText(isStarred) {
@@ -49,7 +48,7 @@ class RecipeBox extends Component {
 				  <img src={recipe.image}></img>
 
           <div className="recipeDesc">
-            <img id={name} data-recipe-id={recipe.id} className="more-icon" src={MoreIcon} onClick={this.openMenuHandler.bind(this)}></img>
+            <img id={name} className="more-icon" src={MoreIcon} onClick={this.openMenuHandler.bind(this, recipe.id)}></img>
             <h3 className="recipe-box-text">{recipe.name}</h3>
           </div>
 
