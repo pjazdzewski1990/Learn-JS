@@ -3,7 +3,7 @@
  */
 
 import { connect } from 'react-redux'
-import { starRecipeActionCreator, queryRecipeActionCreator } from '../actions/RecipeActionCreators'
+import { starRecipeActionCreator, queryRecipeActionCreator } from '../actions/recipeActionCreators'
 import RecipesList from '../components/RecipesList'
 import SearchRecipesService from './../services/SearchRecipesService.js'
 
