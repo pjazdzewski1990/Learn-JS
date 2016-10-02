@@ -1,5 +1,5 @@
 import React from 'react';
-import FilteredRecipesContainer from './FilteredRecipesContainer';
+import RecipesList from '../components/RecipesList';
 
 class App extends React.Component {
     render() {
@@ -8,7 +8,7 @@ class App extends React.Component {
                      <div id = "mainImg">
                             <img src = { require('../images/banner.jpg') }/>
                      </div>
-                     <FilteredRecipesContainer />
+                     <RecipesList />
               </div>
         )
     }

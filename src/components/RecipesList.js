@@ -2,8 +2,20 @@ require('normalize.css/normalize.css');
 require('styles/App.css');
 
 import React, { Component, PropTypes } from 'react';
-import RecipeBox from './RecipeBox.js';
+import { connect } from 'react-redux';
 
+import RecipeBox from './RecipeBox.js';
+import SearchRecipesService from '../services/SearchRecipesService.js'
+import {mapDispatchToProps} from '../containers/mapToProps';
+
+const search = new SearchRecipesService();
+
+@connect((state, dispatch) => {
+  const combinedProps = Object.assign({
+    allRecipes: search.filterRecipes(state.SearchReducer.query, state.RecipeReducer)
+  }, mapDispatchToProps(dispatch));
+  return combinedProps;
+}, mapDispatchToProps)
 class RecipesList extends Component {
     static propTypes = {
       allRecipes: PropTypes.arrayOf(PropTypes.shape({
