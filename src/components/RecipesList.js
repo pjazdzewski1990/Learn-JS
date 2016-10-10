@@ -5,17 +5,9 @@ import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 
 import RecipeBox from './RecipeBox.js';
-import SearchRecipesService from '../services/SearchRecipesService.js'
-import {mapDispatchToProps} from '../containers/mapToProps';
+import {mapDispatchToProps, mapStateToProps} from '../containers/mapToProps';
 
-const search = new SearchRecipesService();
-
-@connect((state, dispatch) => {
-  const combinedProps = Object.assign({
-    allRecipes: search.filterRecipes(state.SearchReducer.query, state.RecipeReducer)
-  }, mapDispatchToProps(dispatch));
-  return combinedProps;
-}, mapDispatchToProps)
+@connect(mapStateToProps, mapDispatchToProps)
 class RecipesList extends Component {
     static propTypes = {
       allRecipes: PropTypes.arrayOf(PropTypes.shape({
