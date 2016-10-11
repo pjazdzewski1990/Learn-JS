@@ -1,41 +1,46 @@
 require('normalize.css/normalize.css');
 require('styles/App.css');
 
-import React, { Component } from 'react';
-import RecipeBox from './RecipeBox.js';
-import SearchRecipesService from './../services/SearchRecipesService.js';
+import React, { Component, PropTypes } from 'react';
+import { connect } from 'react-redux';
 
+import RecipeBox from './RecipeBox.js';
+import {mapDispatchToProps, mapStateToProps} from '../containers/mapToProps';
+
+@connect(mapStateToProps, mapDispatchToProps)
 class RecipesList extends Component {
-    componentWillMount() {
-      this.setState({recipesToShow: this.props.allRecipes});
-      this.search = new SearchRecipesService();
+    static propTypes = {
+      allRecipes: PropTypes.arrayOf(PropTypes.shape({
+        id: PropTypes.number.isRequired,
+        name: PropTypes.string.isRequired,
+        description: PropTypes.string.isRequired,
+        image: PropTypes.string.isRequired,
+        isStarred: PropTypes.bool.isRequired
+      })).isRequired,
+      onStarClick: React.PropTypes.func.isRequired,
+      onSearchChanged: React.PropTypes.func.isRequired
     }
-    handleSearch(event) {
-      const searchQuery = event.target.value;
-      const allRecipes = this.props.allRecipes;
-      this.setState({recipesToShow: this.search.filterRecipes(searchQuery, allRecipes)});
-    }
+
     render() {
-        const recipesBoxes = this.state.recipesToShow.map(recipe => {
-            return (
-                <RecipeBox key={recipe.name} recipeId={recipe.id} recipeName={recipe.name} recipeImage={recipe.image} />
-            );
+        const {onStarClick, onSearchChanged} = this.props;
+
+        const recipesBoxes = this.props.allRecipes.map(recipe => {
+          return (
+            <RecipeBox key={recipe.name} recipe={recipe} onStarClick={onStarClick}/>
+          );
         });
+
         return (
           <div className="recipeList">
 				    <input type="text"
               placeholder="Search recipes..."
-              onChange={this.handleSearch.bind(this)} />
+              onChange={onSearchChanged} />
             <div id="cen">
               {recipesBoxes}
             </div>
 			    </div>
         );
     }
-}
-
-RecipesList.propTypes = {
-    allRecipes: React.PropTypes.arrayOf(React.PropTypes.object)
 }
 
 export default RecipesList;
