@@ -1,12 +1,17 @@
 import React from 'react';
 import { render } from 'react-dom';
 import { Provider } from 'react-redux'
-import { createStore } from 'redux'
+import { createStore, applyMiddleware } from 'redux';
+import thunkMiddleware from 'redux-thunk';
+import createLogger from 'redux-logger';
+
 import RecipeRootReducer from './reducers/RecipeRootReducer'
 import App from './containers/App';
 
+const loggerMiddleware = createLogger();
+
 const recipesInitialData = [
-  { id: 1, name: 'Foo Wings', description: 'Foooooooo', image: require('./images/wings.jpg'), isStarred: false },
+  { id: 1, name: 'Foo', description: 'Foooooooo', image: require('./images/wings.jpg'), isStarred: false },
   { id: 2, name: 'Bar', description: 'Baaar', image: require('./images/tortilla.jpg'), isStarred: false },
   { id: 3, name: 'Baz', description: 'Baz', image: require('./images/cheeserolls.jpg'), isStarred: false },
   { id: 4, name: 'Foo2', description: 'Foooooooo', image: require('./images/wings.jpg'), isStarred: false },
@@ -19,10 +24,14 @@ const recipesInitialData = [
   { id: 11, name: 'Bar4', description: 'Baaar', image: require('./images/tortilla.jpg'), isStarred: false },
   { id: 12, name: 'Baz4', description: 'Baz', image: require('./images/cheeserolls.jpg'), isStarred: false }
 ];
-const recipeStore = createStore(RecipeRootReducer, {
-  RecipeReducer: recipesInitialData,
-  SearchReducer: {query: ''}
-});
+const recipeStore = createStore(
+  RecipeRootReducer,
+  {
+    RecipeReducer: recipesInitialData,
+    SearchReducer: {query: ''}
+  },
+  applyMiddleware(thunkMiddleware,loggerMiddleware)
+);
 
 render(
   <Provider store={recipeStore}>

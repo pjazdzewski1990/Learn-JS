@@ -15,7 +15,8 @@ class RecipesList extends Component {
         name: PropTypes.string.isRequired,
         description: PropTypes.string.isRequired,
         image: PropTypes.string.isRequired,
-        isStarred: PropTypes.bool.isRequired
+        isStarred: PropTypes.bool.isRequired,
+        isError: PropTypes.bool // is optional
       })).isRequired,
       onStarClick: React.PropTypes.func.isRequired,
       onSearchChanged: React.PropTypes.func.isRequired

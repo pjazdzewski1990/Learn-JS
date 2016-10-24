@@ -12,7 +12,8 @@ class RecipeBox extends Component {
         name: PropTypes.string.isRequired,
         description: PropTypes.string.isRequired,
         image: PropTypes.string.isRequired,
-        isStarred: PropTypes.bool.isRequired
+        isStarred: PropTypes.bool.isRequired,
+        isError: PropTypes.bool // is optional
       }).isRequired,
       onStarClick: React.PropTypes.func.isRequired
     }
@@ -25,7 +26,10 @@ class RecipeBox extends Component {
       window.open('/pdf/dummyRecipe.pdf');
     }
     hoverHandler(){
-      this.setState({isHovering: !this.state.isHovering})
+      this.setState({isHovering: true})
+    }
+    unhoverHandler(){
+      this.setState({isHovering: false});
     }
     openMenuHandler(recipeId, event) {
       event.preventDefault();
@@ -49,12 +53,15 @@ class RecipeBox extends Component {
         {'icon': starIcon, 'label': this.starText(recipe.isStarred), 'function': onStarClick.bind(this)},
         {'icon': PdfIcon, 'label': 'Get as file', 'function': this.printRecipeHandler.bind(this)}
       ];
-      const hoverClass = (this.state.isHovering)? 'recipeBox recipe-hover' : 'recipeBox recipe-no-hover';
+      const hoverClass = (this.state.isHovering)? 'recipe-hover' : 'recipe-no-hover';
+      const errorClass = (this.props.recipe.isError)? 'error-anim' : '';
+
+      const allClasses = `recipeBox ${hoverClass} ${errorClass}`;
 
       return (
-        <div className={hoverClass}
+        <div className={allClasses}
           onMouseOver={this.hoverHandler.bind(this)}
-          onMouseOut={this.hoverHandler.bind(this)}>
+          onMouseOut={this.unhoverHandler.bind(this)}>
 
 				  <img src={recipe.image}></img>
 
