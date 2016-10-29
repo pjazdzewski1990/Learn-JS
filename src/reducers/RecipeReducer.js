@@ -9,44 +9,54 @@ const RecipeReducer = (recipesState = [], action) => {
   switch (action.type) {
     case ActionTypes.STAR_ITEM:
       // modify the local state of fast updates
-      return modify(recipesState, action.recipeId);
+      const starredLocalState = toggleStar(recipesState, action.recipeId);
+      return unsetError(starredLocalState, action.recipeId);
     case ActionTypes.STAR_ITEM_ERROR:
       //revert the change
-      const modified = modify(recipesState, action.recipeId);
-      return setError(modified, action.recipeId);
+      const unstarredLocalState = toggleStar(recipesState, action.recipeId);
+      return setError(unstarredLocalState, action.recipeId);
     case ActionTypes.STAR_ITEM_SUCCESS:
-      console.log('Success!');
+      // do nothing
     default:
       return recipesState;
   }
 };
 
-const setError = (state, recipeId) => {
-  const modifiedState = state.map((currentRecipes) => {
-    if(currentRecipes.id == recipeId) {
-      const modifiedItem = Object.assign({}, currentRecipes);
-      modifiedItem.isError = true;
-      return modifiedItem;
+const modify = (state, recipeId, updateF) => { 
+  const modifiedState = state.map((currentRecipe) => {
+    if(currentRecipe.id == recipeId) {
+      return updateF(currentRecipe);
     } else {
-      return currentRecipes;
+      return currentRecipe;
     }
   });
 
   return modifiedState;
 };
 
-const modify = (state, recipeId) => { // TODO: make more general
-  const modifiedState = state.map((currentRecipes) => {
-    if(currentRecipes.id == recipeId) {
-      const modifiedItem = Object.assign({}, currentRecipes);
-      modifiedItem.isStarred = !modifiedItem.isStarred;
-      return modifiedItem;
-    } else {
-      return currentRecipes;
-    }
+const setError = (state, recipeId) => {
+  return modify(state, recipeId, (currentRecipe) => {
+    const modifiedItem = Object.assign({}, currentRecipe);
+    modifiedItem.isError = true;
+    return modifiedItem;
   });
+};
 
-  return modifiedState;
+const unsetError = (state, recipeId) => {
+  return modify(state, recipeId, (currentRecipe) => {
+    console.log('UNSET ');
+    const modifiedItem = Object.assign({}, currentRecipe);
+    modifiedItem.isError = false;
+    return modifiedItem;
+  });
+};
+
+const toggleStar = (state, recipeId) => {
+  return modify(state, recipeId, (currentRecipe) => {
+    const modifiedItem = Object.assign({}, currentRecipe);
+    modifiedItem.isStarred = !modifiedItem.isStarred;
+    return modifiedItem;
+  });
 };
 
 export default RecipeReducer;
