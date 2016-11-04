@@ -31,6 +31,27 @@ export const starRecipeApiCreator = {
   }
 };
 
+export const loadRecipeApiCreator = {
+  start: (offset) => {
+    return {
+      type: ActionTypes.LOAD_RECIPES_START,
+      offset: offset
+    };
+  },
+  success: (loaded) => {
+    return {
+      type: ActionTypes.LOAD_RECIPES_SUCCESS,
+      loaded: loaded
+    };
+  },
+  error: (err) => {
+    return {
+      type: ActionTypes.LOAD_RECIPES_ERROR,
+      err
+    };
+  }
+};
+
 export const queryRecipeActionCreator = (search) => {
   return {
     type: ActionTypes.UPDATE_SEARCH_QUERY,

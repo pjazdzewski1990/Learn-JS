@@ -28,7 +28,8 @@ const recipeStore = createStore(
   RecipeRootReducer,
   {
     RecipeReducer: recipesInitialData,
-    SearchReducer: {query: ''}
+    SearchReducer: {query: ''},
+    LoadMoreRecipesReducer: {isFetching: false}
   },
   applyMiddleware(thunkMiddleware,loggerMiddleware)
 );

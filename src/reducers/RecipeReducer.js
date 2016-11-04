@@ -17,9 +17,24 @@ const RecipeReducer = (recipesState = [], action) => {
       return setError(unstarredLocalState, action.recipeId);
     case ActionTypes.STAR_ITEM_SUCCESS:
       // do nothing
+      return recipesState;
+
+    case ActionTypes.LOAD_RECIPES_SUCCESS:
+      //merge local and server-side data together
+      return mergeData(action.loaded, recipesState);
+
     default:
       return recipesState;
   }
+};
+
+const mergeData = (backendData, frontendData) => {
+  const existing = frontendData.map((x) => x.id);
+  console.log("Existing", existing);
+  const newItems = backendData.filter((item) => {
+    return !existing.includes(item.id);
+  });
+  return frontendData.concat(newItems);
 };
 
 const modify = (state, recipeId, updateF) => { 
@@ -44,7 +59,6 @@ const setError = (state, recipeId) => {
 
 const unsetError = (state, recipeId) => {
   return modify(state, recipeId, (currentRecipe) => {
-    console.log('UNSET ');
     const modifiedItem = Object.assign({}, currentRecipe);
     modifiedItem.isError = false;
     return modifiedItem;
