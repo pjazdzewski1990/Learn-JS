@@ -24,6 +24,14 @@ class RecipesList extends Component {
       onLoadMore: React.PropTypes.func.isRequired
     }
 
+    findBasepoint(data) {
+      var basepoint = 0;
+      for (; basepoint < data.length; basepoint++) {
+        if(!data[basepoint]) return basepoint;
+      }
+      return basepoint; 
+    }
+
     render() {
         console.log('Root prosp', this.props);
         const {onStarClick, onSearchChanged, onLoadMore} = this.props;
@@ -35,11 +43,13 @@ class RecipesList extends Component {
           );
         });
 
+        const dataBasepoint = this.findBasepoint(this.props.allRecipes);
+
         //TODO: make it pretty
         const more = (this.props.isFetching)? 
-          <strong>Fetching</strong> 
+          <img className="small-spinner" src="/images/spinner.png"></img> 
         : 
-          <button onClick={onLoadMore.bind(this, this.props.allRecipes.length)}>
+          <button onClick={onLoadMore.bind(this, dataBasepoint)}>
             Load more recipes
           </button>;
 

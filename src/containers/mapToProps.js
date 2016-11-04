@@ -22,7 +22,7 @@ export const mapDispatchToProps = (dispatch) => {
       dispatch(starRecipeActionCreator(recipeId));
     },
     onLoadMore: (offset) => {
-      fetch(`http://localhost:3000/api/recipes?offset=${offset}&limit=12`)
+      fetch(`http://localhost:3000/api/recipes?offset=${offset}&limit=11`)
         .then(response => response.json())
         .then(response => {
           dispatch(loadRecipeApiCreator.success(response));

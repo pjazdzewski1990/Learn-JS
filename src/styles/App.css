@@ -160,3 +160,11 @@ div.invisible {
     transform: translate3d(4px, 0, 0);
   }
 }
+
+.small-spinner {
+  height: 50px;
+  width: 50px;
+
+  animation:spin 2.3s linear infinite;
+}
+@keyframes spin { 100% { transform:rotate(360deg); } }
