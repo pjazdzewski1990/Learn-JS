@@ -56,7 +56,7 @@ class RecipeBox extends Component {
       const hoverClass = (this.state.isHovering)? 'recipe-hover' : 'recipe-no-hover';
       const errorClass = (this.props.recipe.isError)? 'error-anim' : '';
 
-      const allClasses = `recipeBox ${hoverClass} ${errorClass}`;
+      const allClasses = `recipeBox fade-in ${hoverClass} ${errorClass}`;
 
       return (
         <div className={allClasses}

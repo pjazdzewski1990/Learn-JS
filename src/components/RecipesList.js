@@ -30,7 +30,7 @@ class RecipesList extends Component {
       if(!query){
         // if user query is not set we load data in blocks
         for (; basepoint < data.length; basepoint++) {
-          if(!data[basepoint]) return basepoint; //TODO: fix eager return
+          if(!data[basepoint]) break; //TODO: fix eager return
         }
       } else {
         basepoint = data.length;

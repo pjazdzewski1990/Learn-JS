@@ -168,3 +168,15 @@ div.invisible {
   animation:spin 2.3s linear infinite;
 }
 @keyframes spin { 100% { transform:rotate(360deg); } }
+
+.fade-in {
+  opacity:0;  /* make things invisible on start */
+  animation:fade ease-in 1;
+  animation-duration:0.75s;
+  animation-fill-mode:forwards; /* keep the last frame to make sure element is visible*/
+}
+
+@keyframes fade { 
+  from { opacity:0; } 
+  to { opacity:1; } 
+}
