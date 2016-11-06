@@ -50,7 +50,7 @@ class RecipesList extends Component {
         });
 
         const dataBasepoint = this.findBasepoint(this.props.allRecipes, this.props.query);
-        console.log("Basepoint is " + dataBasepoint);
+
         const more = (this.props.isFetching)? 
           <img className="small-spinner" src="/images/spinner.png"></img> 
         : 

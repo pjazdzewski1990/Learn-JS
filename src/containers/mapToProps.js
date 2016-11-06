@@ -46,6 +46,9 @@ export const mapDispatchToProps = (dispatch) => {
         });
       // ... search also in local results for immediate response
       dispatch(queryRecipeActionCreator(event.target.value));
+      
+      // show spinner
+      dispatch(loadRecipeApiCreator.start(offset));
     }
   }
 };
