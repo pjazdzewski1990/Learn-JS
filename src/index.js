@@ -9,7 +9,7 @@ import RecipeRootReducer from './reducers/RecipeRootReducer'
 import App from './containers/App';
 
 const loggerMiddleware = createLogger();
-
+//TODO: render server side
 const recipesInitialData = [
   { id: 1, name: 'Foo', description: 'Foooooooo', image: require('./images/wings.jpg'), isStarred: false },
   { id: 2, name: 'Bar', description: 'Baaar', image: require('./images/tortilla.jpg'), isStarred: false },

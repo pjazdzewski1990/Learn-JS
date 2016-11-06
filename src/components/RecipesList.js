@@ -18,22 +18,28 @@ class RecipesList extends Component {
         isStarred: PropTypes.bool.isRequired,
         isError: PropTypes.bool // is optional
       })).isRequired,
-      isFetching: PropTypes.bool.isRequired,
+      isFetching: PropTypes.bool.isRequired, //TODO: should show spinner on filter too
+      query: PropTypes.string.isRequired,
       onStarClick: React.PropTypes.func.isRequired,
       onSearchChanged: React.PropTypes.func.isRequired,
       onLoadMore: React.PropTypes.func.isRequired
     }
 
-    findBasepoint(data) {
+    findBasepoint(data, query) {
       var basepoint = 0;
-      for (; basepoint < data.length; basepoint++) {
-        if(!data[basepoint]) return basepoint;
+      if(!query){
+        // if user query is not set we load data in blocks
+        for (; basepoint < data.length; basepoint++) {
+          if(!data[basepoint]) return basepoint; //TODO: fix eager return
+        }
+      } else {
+        basepoint = data.length;
       }
       return basepoint; 
     }
 
     render() {
-        console.log('Root prosp', this.props);
+        console.log('Root prosp ' + this.props.query, this.props);
         const {onStarClick, onSearchChanged, onLoadMore} = this.props;
 
         //TODO: make them appear in a more pleasent way
@@ -43,13 +49,12 @@ class RecipesList extends Component {
           );
         });
 
-        const dataBasepoint = this.findBasepoint(this.props.allRecipes);
-
-        //TODO: make it pretty
+        const dataBasepoint = this.findBasepoint(this.props.allRecipes, this.props.query);
+        console.log("Basepoint is " + dataBasepoint);
         const more = (this.props.isFetching)? 
           <img className="small-spinner" src="/images/spinner.png"></img> 
         : 
-          <button onClick={onLoadMore.bind(this, dataBasepoint)}>
+          <button onClick={onLoadMore.bind(this, dataBasepoint, this.props.query)}>
             Load more recipes
           </button>;
 
@@ -57,7 +62,7 @@ class RecipesList extends Component {
           <div className="recipeList">
 				    <input type="text"
               placeholder="Search recipes..."
-              onChange={onSearchChanged} />
+              onChange={onSearchChanged.bind(this, dataBasepoint)} />
             <div id="cen">
               {recipesBoxes}
             </div>
