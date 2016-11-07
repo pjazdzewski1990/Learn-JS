@@ -52,7 +52,7 @@ class RecipesList extends Component {
         const more = (this.props.isFetching)?
           <img className="small-spinner" src="/images/spinner.png"></img>
         :
-          <button onClick={onLoadMore.bind(this, dataBasepoint, this.props.query)}>
+          <button className="show-more-button" onClick={onLoadMore.bind(this, dataBasepoint, this.props.query)}>
             Load more recipes
           </button>;
 
