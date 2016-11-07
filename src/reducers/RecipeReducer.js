@@ -3,7 +3,6 @@
  */
 
 import { ActionTypes } from '../actions/const';
-import { starRecipeApiCreator } from '../actions/recipeActionCreators';
 
 const RecipeReducer = (recipesState = [], action) => {
   switch (action.type) {
@@ -30,14 +29,13 @@ const RecipeReducer = (recipesState = [], action) => {
 
 const mergeData = (backendData, frontendData) => {
   const existing = frontendData.map((x) => x.id);
-  console.log("Existing", existing);
   const newItems = backendData.filter((item) => {
     return !existing.includes(item.id);
   });
   return frontendData.concat(newItems);
 };
 
-const modify = (state, recipeId, updateF) => { 
+const modify = (state, recipeId, updateF) => {
   const modifiedState = state.map((currentRecipe) => {
     if(currentRecipe.id == recipeId) {
       return updateF(currentRecipe);

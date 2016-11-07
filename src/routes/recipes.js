@@ -1,4 +1,6 @@
 var express = require('express');
+import SearchRecipesService from '../services/SearchRecipesService';
+
 var router = express.Router();
 
 // starring recipe - PATCH /recipes/X/star
@@ -33,23 +35,8 @@ router.get('/recipes/:recipeId/star', function(req, res) {
 
 // getting recipes - GET /recipes?offset=X&count=Y&q=foo,bar,baz
 
-var splitIntoKeywords = function(word) {
-  return word.match(/\S+/g);
-};
 
-var setsInterleave = function(set1, set2) {
-  return set1.filter(function(item){ return set2.indexOf(item)>-1; }).length > 0;
-};
-
-var queryByKeywords = function(data, keywords) {
-  return data.filter(function(recipe) {
-    const nameKeywords = splitIntoKeywords(recipe.name);
-    const descKeywords = splitIntoKeywords(recipe.description);
-    console.log("Name " + nameKeywords);
-    console.log("Desc " + descKeywords);
-    return setsInterleave(nameKeywords, keywords) || setsInterleave(descKeywords, keywords);
-  });
-};
+var searchService = new SearchRecipesService();
 
 router.get('/recipes', function(req, res) {
   setTimeout(function() {
@@ -57,14 +44,8 @@ router.get('/recipes', function(req, res) {
 
     const start = parseInt(req.query.offset) || 0;
     const end = parseInt(req.query.limit) || 10;
-
-    var dataToSlice = [];
-    if(req.query.q) {
-      var keywords = req.query.q.split(",");
-      dataToSlice = queryByKeywords(data.slice(), keywords);
-    } else {
-      dataToSlice = data.slice();
-    }
+    
+    var dataToSlice = searchService.filterRecipes(req.query.q, data.slice());
     res.json(dataToSlice.splice(start,end));
   }, 3000);
 });

@@ -33,13 +33,11 @@ export const mapDispatchToProps = (dispatch) => {
       dispatch(loadRecipeApiCreator.start(offset));
     },
     onSearchChanged: (offset, event) => {
-      console.log("Searching with " + offset, event);
       //dual search:
       // search in the backend to get many results ...
       fetch(`http://localhost:3000/api/recipes?offset=${offset}&limit=11&q=${event.target.value}`)
         .then(response => response.json())
         .then(response => {
-          console.log("Received from search ", response);
           dispatch(loadRecipeApiCreator.success(response));
         }, (err) => {
           dispatch(loadRecipeApiCreator.error(err));

@@ -35,14 +35,12 @@ class RecipesList extends Component {
       } else {
         basepoint = data.length;
       }
-      return basepoint; 
+      return basepoint;
     }
 
     render() {
-        console.log('Root prosp ' + this.props.query, this.props);
         const {onStarClick, onSearchChanged, onLoadMore} = this.props;
 
-        //TODO: make them appear in a more pleasent way
         const recipesBoxes = this.props.allRecipes.map(recipe => {
           return (
             <RecipeBox key={recipe.name} recipe={recipe} onStarClick={onStarClick}/>
@@ -51,9 +49,9 @@ class RecipesList extends Component {
 
         const dataBasepoint = this.findBasepoint(this.props.allRecipes, this.props.query);
 
-        const more = (this.props.isFetching)? 
-          <img className="small-spinner" src="/images/spinner.png"></img> 
-        : 
+        const more = (this.props.isFetching)?
+          <img className="small-spinner" src="/images/spinner.png"></img>
+        :
           <button onClick={onLoadMore.bind(this, dataBasepoint, this.props.query)}>
             Load more recipes
           </button>;
