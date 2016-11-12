@@ -25,19 +25,6 @@ class RecipesList extends Component {
       onLoadMore: React.PropTypes.func.isRequired
     }
 
-    findBasepoint(data, query) {
-      var basepoint = 0;
-      if(!query){
-        // if user query is not set we load data in blocks
-        for (; basepoint < data.length; basepoint++) {
-          if(!data[basepoint]) break;
-        }
-      } else {
-        basepoint = data.length;
-      }
-      return basepoint;
-    }
-
     render() {
         const {onStarClick, onSearchChanged, onLoadMore} = this.props;
 
@@ -47,12 +34,12 @@ class RecipesList extends Component {
           );
         });
 
-        const dataBasepoint = this.findBasepoint(this.props.allRecipes, this.props.query);
+        const offset = this.props.allRecipes.length;
 
         const more = (this.props.isFetching)?
           <img className="small-spinner" src="/images/spinner.png"></img>
         :
-          <button className="show-more-button" onClick={onLoadMore.bind(this, dataBasepoint, this.props.query)}>
+          <button className="show-more-button" onClick={onLoadMore.bind(this, offset, this.props.query)}>
             Load more recipes
           </button>;
 
@@ -60,7 +47,7 @@ class RecipesList extends Component {
           <div className="recipeList">
 				    <input type="text"
               placeholder="Search recipes..."
-              onChange={onSearchChanged.bind(this, dataBasepoint)} />
+              onChange={onSearchChanged.bind(this, offset)} />
             <div id="cen">
               {recipesBoxes}
             </div>
